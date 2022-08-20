@@ -21,6 +21,7 @@ button {
   background: #00b800;
   padding: 10px 20px;
   text-transform: uppercase;
+  cursor: pointer;
 }
 
 h1 {
@@ -34,6 +35,11 @@ h4{
 
 .title{
   margin: 3em auto 1.25em;
+}
+
+.disabled{
+  pointer-events: none;
+  opacity: 0.5;
 }
 
 textarea {
