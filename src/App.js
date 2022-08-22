@@ -1,5 +1,5 @@
 import './App.css'
-import React, { useState, useEffect } from "react"
+import React, { useState, useEffect, useRef } from "react"
 
 const App = () => {
   // State for managing the text input from textarea
@@ -10,6 +10,9 @@ const App = () => {
 
   // State for starting the game
   const [start, setStart] = useState(false)
+
+  // This allows us to select textarea DOM element
+  const inputBoxRef = useRef(null)
 
   // State setter function which is run when onChange event is triggered on the textarea
   const handleChange = (event) => {
@@ -24,10 +27,12 @@ const App = () => {
   // start => true
   // timer => 10secs
   // text => empty string
+  // textarea => in focus
   const handleClick = () => {
     setStart(!start)
     setTimer(10)
     setText({ ...text, text: "" })
+    inputBoxRef.current.focus()
   }
 
 
@@ -50,7 +55,8 @@ const App = () => {
       <textarea
         name="text"
         value={text.text}
-        onChange={handleChange} />
+        onChange={handleChange}
+        ref={inputBoxRef} />
       <h4>Time remaining: {timer} </h4>
       {/* Conditionally enabling and disabling the button */}
       <button onClick={handleClick} className={timer > 0 && start ? "disabled" : "enabled"}>
